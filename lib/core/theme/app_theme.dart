@@ -1,7 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../helper/app_colors_extentions.dart';
-import 'app_typography.dart';
+import 'app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
