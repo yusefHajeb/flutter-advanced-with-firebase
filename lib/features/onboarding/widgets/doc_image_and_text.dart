@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_with_firebase/core/helper/extentions.dart';
-import 'package:flutter_advanced_with_firebase/core/theme/app_colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class DoctorImageAndText extends StatelessWidget {
