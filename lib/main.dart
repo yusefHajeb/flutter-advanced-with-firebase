@@ -11,6 +11,8 @@ void main() async {
       WidgetsFlutterBinding.ensureInitialized();
 
   FlutterNativeSplash.preserve(widgetsBinding: widgetsFlutterBinding);
+  FlutterNativeSplash.remove();
+
   await AppTheme.initialize();
   runApp(DocApp(
     appRouter: AppRouter(),
