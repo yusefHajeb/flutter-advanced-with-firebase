@@ -12,7 +12,7 @@ class AppTheme {
   }
 
   static final _lightAppColors = AppColorsExtension(
-    primary: const Color.fromARGB(255, 200, 160, 80),
+    primary: const Color.fromARGB(255, 104, 80, 200),
     onPrimary: Colors.white,
     secondary: const Color.fromARGB(255, 194, 153, 8),
     onSecondary: Colors.black,
