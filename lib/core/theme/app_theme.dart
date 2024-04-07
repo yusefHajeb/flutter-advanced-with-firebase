@@ -45,7 +45,7 @@ class AppTheme {
         ),
         displayMedium: TextStyles.headlineMedium.copyWith(
           color: _darkAppColors.onBackground,
-          fontWeight: FontWeight.w600,
+          
         ),
         headlineMedium: TextStyles.headlineMedium
             .copyWith(color: _darkAppColors.onBackground),
@@ -216,8 +216,8 @@ class AppTheme {
           ),
           labelMedium:
               TextStyles.body1.copyWith(color: _lightAppColors.onBackground),
-          bodyMedium:
-              TextStyles.body1.copyWith(color: _lightAppColors.onBackground),
+          bodyMedium: TextStyles.bodyMediuum
+              .copyWith(color: _lightAppColors.onBackground),
           headlineLarge: TextStyles.headlineLarge
               .copyWith(color: _lightAppColors.onBackground),
           headlineSmall: TextStyles.bodySmall
