@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_with_firebase/core/routes/routes.dart';
 import 'package:flutter_advanced_with_firebase/features/login/ui/login_screen.dart';
 import 'package:flutter_advanced_with_firebase/features/onboarding/onboarding_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../features/login/logic/cubit/login_cubet_cubit.dart';
+import '../di/dependency_injection.dart';
 
 class AppRouter {
   Route genratedRoute(RouteSettings settings) {
@@ -10,7 +14,11 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
 
       case Routes.loginScreen:
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => getIt<LoginCubet>(),
+                  child: const LoginScreen(),
+                ));
       default:
         return MaterialPageRoute(
             builder: (_) => const Scaffold(
