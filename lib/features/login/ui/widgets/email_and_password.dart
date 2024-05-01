@@ -30,6 +30,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   @override
   void initState() {
     passwordController = context.read<LoginCubet>().passwordController;
+    setupPasswordControllerListener();
     super.initState();
   }
 
@@ -83,12 +84,12 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                 }
               }),
           AppSize.verticalSize(24),
-          const PasswordValidator(
-            hasLowerCase: true,
-            hasUpperCase: false,
-            hasSpecialCharacter: false,
-            hasNumber: false,
-            hasMiningth: false,
+          PasswordValidator(
+            hasLowerCase: hasLowercase,
+            hasUpperCase: hasUppercase,
+            hasSpecialCharacter: hasSpecialCharacters,
+            hasNumber: hasNumber,
+            hasMiningth: hasMinLength,
           ),
         ],
       ),
