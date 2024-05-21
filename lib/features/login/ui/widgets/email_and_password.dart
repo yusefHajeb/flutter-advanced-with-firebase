@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/helper/app_regex.dart';
 import '../../../../core/helper/app_size.dart';
 import '../../../../core/widgets/app_text_form_field.dart';
+import 'password_livel.dart';
 
 class EmailAndPassword extends StatefulWidget {
   const EmailAndPassword({super.key});
@@ -24,6 +25,13 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool hasSpecialCharacters = false;
   bool hasNumber = false;
   bool hasMinLength = false;
+  // List<Map<String, dynamic>> mapValidator = [
+  //   {'1': false},
+  //   {'2': false},
+  //   {'3': false},
+  //   {'4': false},
+  //   {'5': false}
+  // ];
 
   TextEditingController passwordController = TextEditingController();
 
@@ -35,6 +43,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   }
 
   void setupPasswordControllerListener() {
+    // final int count = 0;
     passwordController.addListener(() {
       setState(() {
         hasLowercase = AppRegex.hasLowerCase(passwordController.text);
@@ -43,6 +52,11 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             AppRegex.hasSpecialCharacter(passwordController.text);
         hasNumber = AppRegex.hasNumber(passwordController.text);
         hasMinLength = AppRegex.hasMinLength(passwordController.text);
+        // mapValidator[0]['0'] = AppRegex.hasLowerCase(passwordController.text);
+        // mapValidator[1]['1'] = AppRegex.hasUpperCase(passwordController.text);
+        // mapValidator[2]['2'] = AppRegex.hasUpperCase(passwordController.text);
+        // mapValidator[3]['3'] = AppRegex.hasUpperCase(passwordController.text);
+        // mapValidator[4]['4'] = {AppRegex.hasUpperCase(passwordController.text)};
       });
     });
   }
@@ -84,6 +98,20 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                 }
               }),
           AppSize.verticalSize(24),
+          PasswordValidatorColorWidget(
+            hasLowerCase: hasLowercase,
+            hasUpperCase: hasUppercase,
+            hasSpecialCharacter: hasSpecialCharacters,
+            hasNumber: hasNumber,
+            hasMiningth: hasMinLength,
+            value: [
+              hasLowercase,
+              hasUppercase,
+              hasSpecialCharacters,
+              hasNumber,
+              hasMinLength
+            ],
+          ),
           PasswordValidator(
             hasLowerCase: hasLowercase,
             hasUpperCase: hasUppercase,

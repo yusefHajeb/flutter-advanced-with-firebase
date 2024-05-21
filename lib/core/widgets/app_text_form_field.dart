@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_with_firebase/core/helper/extentions.dart';
 import 'package:flutter_advanced_with_firebase/core/theme/app_colors.dart';
 
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 class AppTextFormField extends StatelessWidget {
-  final EdgeInsetsGeometry? contentPadding;
+  final EdgeInsetsGeometry contentPadding;
   final InputBorder? focusedBorder;
   final InputBorder? enabledBorder;
   final TextStyle? inputTextStyle;
@@ -18,7 +16,7 @@ class AppTextFormField extends StatelessWidget {
   final Function(String?) validator;
   const AppTextFormField({
     super.key,
-    this.contentPadding,
+    this.contentPadding = const EdgeInsets.all(18),
     this.focusedBorder,
     this.enabledBorder,
     this.inputTextStyle,
@@ -37,8 +35,7 @@ class AppTextFormField extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         isDense: true,
-        contentPadding: contentPadding ??
-            EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
+        contentPadding: contentPadding,
         focusedBorder: focusedBorder ??
             OutlineInputBorder(
               borderSide: const BorderSide(
