@@ -4,6 +4,9 @@ import 'package:flutter_advanced_with_firebase/features/login/data/models/login_
 import 'package:retrofit/http.dart';
 
 import '../../features/login/data/models/login_response.dart';
+import '../../features/sign_up/data/models/sign_up_reqester_body.dart';
+import '../../features/sign_up/data/models/sign_up_resonse_body.dart';
+// import '../../features/sign_up/data/models/sign_up_resonse_body.dart';
 
 part 'api_service.g.dart';
 
@@ -16,8 +19,8 @@ abstract class ApiService {
     @Body() LoginRequestBody loginRequestBody,
   );
 
-  // @POST(ApiConstants.signup)
-  // Future<SignupResponse> signup(
-  //   @Body() SignupRequestBody signupRequestBody,
-  // );
+  @POST(ApiConstants.signup)
+  Future<SignupResponse> signup(
+    @Body() SignupRequestBody signupRequestBody,
+  );
 }
