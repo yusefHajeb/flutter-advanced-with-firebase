@@ -8,6 +8,7 @@ class PasswordValidatorColorWidget extends StatelessWidget {
       required this.hasSpecialCharacter,
       required this.hasNumber,
       required this.value,
+      required this.values,
       required this.hasMiningth});
   final bool hasLowerCase;
   final bool hasUpperCase;
@@ -15,6 +16,7 @@ class PasswordValidatorColorWidget extends StatelessWidget {
   final bool hasNumber;
   final bool hasMiningth;
   final List<bool> value;
+  final List<bool> values;
 
   @override
   Widget build(BuildContext context) {
@@ -22,61 +24,20 @@ class PasswordValidatorColorWidget extends StatelessWidget {
       children: [
         Flex(
           direction: Axis.horizontal,
-          children: [
-            Flexible(
-                flex: 1,
-                child: Container(
-                  margin: const EdgeInsets.only(right: 3),
-                  height: 2,
-                  decoration: BoxDecoration(
-                    color: hasLowerCase == false ? Colors.red : Colors.green,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                )),
-            Flexible(
-                flex: 1,
-                child: Container(
-                  margin: const EdgeInsets.only(right: 3),
-                  height: 2,
-                  decoration: BoxDecoration(
-                    color: hasUpperCase == false ? Colors.red : Colors.green,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                )),
-            Flexible(
-                flex: 1,
-                child: Container(
-                  margin: const EdgeInsets.only(right: 3),
-                  height: 2,
-                  decoration: BoxDecoration(
-                    color: hasNumber == false ? Colors.red : Colors.green,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                )),
-            Flexible(
-                flex: 1,
-                child: Container(
-                  margin: const EdgeInsets.only(right: 2),
-                  height: 3,
-                  decoration: BoxDecoration(
-                    color: hasSpecialCharacter == false
-                        ? Colors.red
-                        : Colors.green,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                )),
-            Flexible(
-                flex: 1,
-                child: Container(
-                  margin: const EdgeInsets.only(right: 2),
-                  height: 3,
-                  decoration: BoxDecoration(
-                    color: hasMiningth == false ? Colors.red : Colors.green,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                ))
-          ],
-        )
+          children: List.generate(values.length, (index) {
+            return Flexible(
+              flex: 1,
+              child: Container(
+                margin: const EdgeInsets.only(right: 3),
+                height: 2,
+                decoration: BoxDecoration(
+                  color: values[index] ? Colors.green : Colors.red,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+            );
+          }),
+        ),
       ],
     );
   }
