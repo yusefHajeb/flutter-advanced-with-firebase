@@ -1,12 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_advanced_with_firebase/features/login/logic/cubit/login_cubet_cubit.dart';
-import 'package:flutter_advanced_with_firebase/features/login/ui/widgets/password_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/helper/app_regex.dart';
 import '../../../../core/helper/app_size.dart';
+import '../../../../core/helper/app_local_data_model.dart';
 import '../../../../core/widgets/app_text_form_field.dart';
 import 'password_livel.dart';
 
@@ -25,14 +23,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool hasSpecialCharacters = false;
   bool hasNumber = false;
   bool hasMinLength = false;
-  // List<Map<String, dynamic>> mapValidator = [
-  //   {'1': false},
-  //   {'2': false},
-  //   {'3': false},
-  //   {'4': false},
-  //   {'5': false}
-  // ];
-
+  List<bool> isPassword = [false, false, false, false, false];
   TextEditingController passwordController = TextEditingController();
 
   @override
@@ -43,20 +34,15 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   }
 
   void setupPasswordControllerListener() {
-    // final int count = 0;
     passwordController.addListener(() {
       setState(() {
-        hasLowercase = AppRegex.hasLowerCase(passwordController.text);
-        hasUppercase = AppRegex.hasUpperCase(passwordController.text);
-        hasSpecialCharacters =
-            AppRegex.hasSpecialCharacter(passwordController.text);
-        hasNumber = AppRegex.hasNumber(passwordController.text);
-        hasMinLength = AppRegex.hasMinLength(passwordController.text);
-        // mapValidator[0]['0'] = AppRegex.hasLowerCase(passwordController.text);
-        // mapValidator[1]['1'] = AppRegex.hasUpperCase(passwordController.text);
-        // mapValidator[2]['2'] = AppRegex.hasUpperCase(passwordController.text);
-        // mapValidator[3]['3'] = AppRegex.hasUpperCase(passwordController.text);
-        // mapValidator[4]['4'] = {AppRegex.hasUpperCase(passwordController.text)};
+        isPassword[0] = AppRegex.hasLowerCase(passwordController.text);
+        isPassword[1] = AppRegex.hasUpperCase(passwordController.text);
+        isPassword[2] = AppRegex.hasSpecialCharacter(passwordController.text);
+        isPassword[3] = AppRegex.hasNumber(passwordController.text);
+        isPassword[4] = AppRegex.hasMinLength(passwordController.text);
+
+        isPassword.sort((a, b) => b ? 1 : 0 - (a ? 1 : 0));
       });
     });
   }
@@ -93,12 +79,13 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                 ),
               ),
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter a valid password';
-                }
+                final validator =
+                    AppRegex.reqexPassword(value, AppLocalModel.passwordReqex);
+                return validator;
               }),
           AppSize.verticalSize(24),
           PasswordValidatorColorWidget(
+            values: isPassword,
             hasLowerCase: hasLowercase,
             hasUpperCase: hasUppercase,
             hasSpecialCharacter: hasSpecialCharacters,
@@ -111,13 +98,6 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               hasNumber,
               hasMinLength
             ],
-          ),
-          PasswordValidator(
-            hasLowerCase: hasLowercase,
-            hasUpperCase: hasUppercase,
-            hasSpecialCharacter: hasSpecialCharacters,
-            hasNumber: hasNumber,
-            hasMiningth: hasMinLength,
           ),
         ],
       ),
