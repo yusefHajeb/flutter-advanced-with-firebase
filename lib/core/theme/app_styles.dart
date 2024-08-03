@@ -48,9 +48,9 @@ class TextStyles {
   );
 
   static TextStyle bodyMediuum = TextStyle(
-    fontSize: 14.sp,
+    fontSize: 16.sp,
     fontFamily: "Almarai",
-    fontWeight: FontWeightHelper.medium,
+    fontWeight: FontWeightHelper.bold,
   );
 
   static TextStyle headlineMedium = TextStyle(

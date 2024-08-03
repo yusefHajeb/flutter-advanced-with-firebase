@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import '../../features/sign_up/ui/widgets/sing_up_form.dart';
 
 class AppRegex {
