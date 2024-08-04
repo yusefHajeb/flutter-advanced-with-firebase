@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class PasswordValidatorColorWidget extends StatelessWidget {
-  PasswordValidatorColorWidget(
+class BuildPasswordValidatorWidget extends StatelessWidget {
+  BuildPasswordValidatorWidget(
       {super.key,
       required this.hasLowerCase,
       required this.hasUpperCase,
       required this.hasSpecialCharacter,
       required this.hasNumber,
-      required this.value,
+      // required this.value,
       required this.values,
       required this.hasMiningth});
   final bool hasLowerCase;
@@ -15,7 +15,7 @@ class PasswordValidatorColorWidget extends StatelessWidget {
   final bool hasSpecialCharacter;
   final bool hasNumber;
   final bool hasMiningth;
-  final List<bool> value;
+  // final List<bool> value;
   final List<bool> values;
 
   @override

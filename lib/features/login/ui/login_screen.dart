@@ -8,6 +8,7 @@ import 'package:flutter_advanced_with_firebase/features/login/ui/widgets/email_a
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/routes/routes.dart';
 import '../logic/cubit/login_cubet_cubit.dart';
 import 'widgets/login_bloc_lisinter.dart';
 
@@ -45,6 +46,21 @@ class LoginScreen extends StatelessWidget {
                         fontSize: 14,
                         color: AppColors.primaryColor,
                         fontWeight: FontWeightHelper.extraBold),
+                  ),
+                ),
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: InkWell(
+                    onTap: () {
+                      context.pushReplaceNamed(Routes.singUpScreen);
+                    },
+                    child: const Text(
+                      'singUp',
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeightHelper.extraBold),
+                    ),
                   ),
                 ),
                 AppSize.verticalSize(36),
