@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_with_firebase/core/helper/app_size.dart';
 import 'package:flutter_advanced_with_firebase/core/helper/extentions.dart';
 import 'package:flutter_advanced_with_firebase/core/theme/app_colors.dart';
+import 'package:flutter_advanced_with_firebase/features/home_screen/logic/home_state.dart';
+import 'package:flutter_advanced_with_firebase/features/home_screen/ui/widgets/doctor_speceialization_list_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/widgets/animated_in_effect.dart';
 import '../../../core/widgets/app_text_button.dart';
+import '../logic/home_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
   static const homeScreen = '/homeScreen';
@@ -13,6 +17,30 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Row buildHomeTopBar(BuildContext context) {
+      return Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Hi Yousef',
+                style: context.theme.textTheme.headlineLarge,
+              ),
+              Text('How are you ? ',
+                  style: context.theme.textTheme.headlineMedium),
+            ],
+          ),
+          const Spacer(),
+          CircleAvatar(
+            radius: 24,
+            backgroundColor: AppColors.lighterGray,
+            child: SvgPicture.asset('assets/svgs/notifications.svg'),
+          )
+        ],
+      );
+    }
+
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -28,7 +56,7 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _buildHomeTopBar(context),
+                buildHomeTopBar(context),
                 AppSize.verticalSize(50),
                 Container(
                   decoration: const BoxDecoration(
@@ -113,34 +141,31 @@ class HomeScreen extends StatelessWidget {
                     Text('See All',
                         style: context.theme.textTheme.headlineSmall)
                   ],
-                )
+                ),
+                AppSize.verticalSize(10),
+                BlocBuilder<HomeCubit, HomeState>(
+                  buildWhen: (previous, current) =>
+                      current is SpecializationLoading ||
+                      current is SpecializationError ||
+                      current is SpecializationSuccess,
+                  builder: (context, state) {
+                    if (state is SpecializationSuccess) {
+                      return DoctorSpeceializationListView(
+                        data: state.specializations.specializationData ?? [],
+                      );
+                    } else if (state is SpecializationLoading) {
+                      return CircularProgressIndicator();
+                    } else if (state is SpecializationError) {
+                      return Text(
+                          state.error.apiErrorModel.message ?? "error Message");
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  },
+                ),
               ],
             ),
           ),
         ));
-  }
-
-  Row _buildHomeTopBar(BuildContext context) {
-    return Row(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Hi Yousef',
-              style: context.theme.textTheme.headlineLarge,
-            ),
-            Text('How are you ? ',
-                style: context.theme.textTheme.headlineMedium),
-          ],
-        ),
-        const Spacer(),
-        CircleAvatar(
-          radius: 24,
-          backgroundColor: AppColors.lighterGray,
-          child: SvgPicture.asset('assets/svgs/notifications.svg'),
-        )
-      ],
-    );
   }
 }
