@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_with_firebase/core/routes/routes.dart';
+import 'package:flutter_advanced_with_firebase/features/home_screen/logic/home_cubit.dart';
 import 'package:flutter_advanced_with_firebase/features/home_screen/ui/home_screen.dart';
 import 'package:flutter_advanced_with_firebase/features/login/ui/login_screen.dart';
 import 'package:flutter_advanced_with_firebase/features/onboarding/onboarding_screen.dart';
@@ -30,7 +31,11 @@ class AppRouter {
           ),
         );
       case Routes.homeScreen:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => HomeCubit(getIt()),
+                  child: const HomeScreen(),
+                ));
       default:
         return MaterialPageRoute(
             builder: (_) => const Scaffold(
