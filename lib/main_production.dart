@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/di/dependency_injection.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   setupGtIt();
   await ScreenUtil.ensureScreenSize();
   WidgetsBinding widgetsFlutterBinding =
