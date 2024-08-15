@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "918523247252",
-    "project_id": "flutter-app-distribution-e4306",
-    "storage_bucket": "flutter-app-distribution-e4306.appspot.com"
+    "project_number": "457551392024",
+    "project_id": "doctor-distribution",
+    "storage_bucket": "doctor-distribution.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:918523247252:android:46366237ead7a82596d281",
+        "mobilesdk_app_id": "1:457551392024:android:11624d6db9045e0bc2c26d",
         "android_client_info": {
           "package_name": "com.example.flutter_advanced_with_firebase"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAnzAkatCuqfIbX435YcdwkNrBvKviyFa0"
+          "current_key": "AIzaSyCUFGQshLkYvITu5tGgD0pk8pQn43wV9Sg"
         }
       ],
       "services": {
