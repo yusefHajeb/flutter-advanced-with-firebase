@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAnzAkatCuqfIbX435YcdwkNrBvKviyFa0',
-    appId: '1:918523247252:android:46366237ead7a82596d281',
-    messagingSenderId: '918523247252',
-    projectId: 'flutter-app-distribution-e4306',
-    storageBucket: 'flutter-app-distribution-e4306.appspot.com',
+    apiKey: 'AIzaSyCUFGQshLkYvITu5tGgD0pk8pQn43wV9Sg',
+    appId: '1:457551392024:android:11624d6db9045e0bc2c26d',
+    messagingSenderId: '457551392024',
+    projectId: 'doctor-distribution',
+    storageBucket: 'doctor-distribution.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCHk6JyEcKSQlwCdY7XTUvvLHJ99uK5iLM',
-    appId: '1:918523247252:ios:4570fd74e7c3e09296d281',
-    messagingSenderId: '918523247252',
-    projectId: 'flutter-app-distribution-e4306',
-    storageBucket: 'flutter-app-distribution-e4306.appspot.com',
+    apiKey: 'AIzaSyDxdyno1iUpCd3b7r5cKiWsdc8aXBW6jLQ',
+    appId: '1:457551392024:ios:9bfbbded6cd49a55c2c26d',
+    messagingSenderId: '457551392024',
+    projectId: 'doctor-distribution',
+    storageBucket: 'doctor-distribution.appspot.com',
     iosBundleId: 'com.example.flutterAdvancedWithFirebase',
   );
 }
