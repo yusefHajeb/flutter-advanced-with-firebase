@@ -8,6 +8,7 @@ import 'package:flutter_advanced_with_firebase/features/login/logic/cubit/login_
 import 'package:flutter_advanced_with_firebase/features/sign_up/logic/cubit/sing_up_cubit.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../features/home_screen/logic/home_cubit.dart';
 import '../../features/sign_up/data/repo/sing_up_repo.dart';
 
 final getIt = GetIt.instance;
@@ -28,5 +29,5 @@ Future<void> setupGtIt() async {
   getIt.registerLazySingleton<HomeApiService>(() => HomeApiService(dio));
   getIt
       .registerLazySingleton<HomeRepo>(() => HomeRepo(homeApiService: getIt()));
-  // getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
+  getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
 }

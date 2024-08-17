@@ -19,9 +19,10 @@ class DoctorSpeceializationListView extends StatelessWidget {
         itemCount: data.length,
         itemBuilder: (context, index) => Column(
           children: [
-            DoctorSpeceializationItem(
-              item: data[index],
-            )
+            if (data.isNotEmpty)
+              DoctorSpeceializationItem(
+                item: data[index],
+              ),
           ],
         ),
       ),

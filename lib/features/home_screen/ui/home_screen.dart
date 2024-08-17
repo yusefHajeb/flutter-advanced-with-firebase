@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_with_firebase/core/helper/app_size.dart';
 import 'package:flutter_advanced_with_firebase/core/helper/extentions.dart';
+import 'package:flutter_advanced_with_firebase/core/networking/api_error_handler.dart';
 import 'package:flutter_advanced_with_firebase/core/theme/app_colors.dart';
 import 'package:flutter_advanced_with_firebase/features/home_screen/logic/home_state.dart';
-import 'package:flutter_advanced_with_firebase/features/home_screen/ui/widgets/doctor_speceialization_list_view.dart';
+import 'package:flutter_advanced_with_firebase/features/home_screen/ui/widgets/doctors_list_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/widgets/animated_in_effect.dart';
@@ -149,18 +150,38 @@ class HomeScreen extends StatelessWidget {
                       current is SpecializationError ||
                       current is SpecializationSuccess,
                   builder: (context, state) {
-                    if (state is SpecializationSuccess) {
-                      return DoctorSpeceializationListView(
-                        data: state.specializations.specializationData ?? [],
+                    return state.maybeWhen(specializationLoading: () {
+                      return const SizedBox(
+                          height: 100,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ));
+                    }, specializationError: (error) {
+                      return Center(
+                        child: Text(ErrorHandler.handle(error.apiErrorModel)
+                            .toString()),
                       );
-                    } else if (state is SpecializationLoading) {
-                      return CircularProgressIndicator();
-                    } else if (state is SpecializationError) {
-                      return Text(
-                          state.error.apiErrorModel.message ?? "error Message");
-                    } else {
-                      return const CircularProgressIndicator();
-                    }
+                    }, specializationSuccess: (specializationDataModel) {
+                      var specilizationData = specializationDataModel;
+                      print('specilization data ==================');
+                      // print(specilizationData?.first?.doctors);
+                      return Expanded(
+                        child: Column(
+                          children: [
+                            // DoctorSpeceializationListView(
+                            //   data: state.specializations.specializationData ??
+                            //       [],
+                            // ),
+                            DoctorsListView(
+                                doctors: specilizationData.doctorsList ?? [])
+                          ],
+                        ),
+                      );
+                    }, orElse: () {
+                      return const Center(
+                        child: Text("defult"),
+                      );
+                    });
                   },
                 ),
               ],

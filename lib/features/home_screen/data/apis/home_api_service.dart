@@ -10,6 +10,7 @@ abstract class HomeApiService {
     Dio dio,
   ) = _HomeApiService;
 
+  // @Headers({"Content-Type": "application/json", "Custom_Header": "you"})
   @GET(ApiConstants.specializationEN)
   Future<SpecializationResponseModel> getHomeData();
 }
