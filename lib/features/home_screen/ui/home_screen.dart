@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_with_firebase/core/helper/app_size.dart';
 import 'package:flutter_advanced_with_firebase/core/helper/extentions.dart';
+import 'package:flutter_advanced_with_firebase/core/networking/api_error_handler.dart';
 import 'package:flutter_advanced_with_firebase/core/theme/app_colors.dart';
+import 'package:flutter_advanced_with_firebase/features/home_screen/logic/home_state.dart';
+import 'package:flutter_advanced_with_firebase/features/home_screen/ui/widgets/doctors_list_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/widgets/animated_in_effect.dart';
 import '../../../core/widgets/app_text_button.dart';
+import '../logic/home_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
   static const homeScreen = '/homeScreen';
@@ -13,6 +18,30 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Row buildHomeTopBar(BuildContext context) {
+      return Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Hi Yousef',
+                style: context.theme.textTheme.headlineLarge,
+              ),
+              Text('How are you ? ',
+                  style: context.theme.textTheme.headlineMedium),
+            ],
+          ),
+          const Spacer(),
+          CircleAvatar(
+            radius: 24,
+            backgroundColor: AppColors.lighterGray,
+            child: SvgPicture.asset('assets/svgs/notifications.svg'),
+          )
+        ],
+      );
+    }
+
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -28,7 +57,7 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _buildHomeTopBar(context),
+                buildHomeTopBar(context),
                 AppSize.verticalSize(50),
                 Container(
                   decoration: const BoxDecoration(
@@ -113,34 +142,51 @@ class HomeScreen extends StatelessWidget {
                     Text('See All',
                         style: context.theme.textTheme.headlineSmall)
                   ],
-                )
+                ),
+                AppSize.verticalSize(10),
+                BlocBuilder<HomeCubit, HomeState>(
+                  buildWhen: (previous, current) =>
+                      current is SpecializationLoading ||
+                      current is SpecializationError ||
+                      current is SpecializationSuccess,
+                  builder: (context, state) {
+                    return state.maybeWhen(specializationLoading: () {
+                      return const SizedBox(
+                          height: 100,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ));
+                    }, specializationError: (error) {
+                      return Center(
+                        child: Text(ErrorHandler.handle(error.apiErrorModel)
+                            .toString()),
+                      );
+                    }, specializationSuccess: (specializationDataModel) {
+                      var specilizationData = specializationDataModel;
+                      print('specilization data ==================');
+                      // print(specilizationData?.first?.doctors);
+                      return Expanded(
+                        child: Column(
+                          children: [
+                            // DoctorSpeceializationListView(
+                            //   data: state.specializations.specializationData ??
+                            //       [],
+                            // ),
+                            DoctorsListView(
+                                doctors: specilizationData.doctorsList ?? [])
+                          ],
+                        ),
+                      );
+                    }, orElse: () {
+                      return const Center(
+                        child: Text("defult"),
+                      );
+                    });
+                  },
+                ),
               ],
             ),
           ),
         ));
-  }
-
-  Row _buildHomeTopBar(BuildContext context) {
-    return Row(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Hi Yousef',
-              style: context.theme.textTheme.headlineLarge,
-            ),
-            Text('How are you ? ',
-                style: context.theme.textTheme.headlineMedium),
-          ],
-        ),
-        const Spacer(),
-        CircleAvatar(
-          radius: 24,
-          backgroundColor: AppColors.lighterGray,
-          child: SvgPicture.asset('assets/svgs/notifications.svg'),
-        )
-      ],
-    );
   }
 }
