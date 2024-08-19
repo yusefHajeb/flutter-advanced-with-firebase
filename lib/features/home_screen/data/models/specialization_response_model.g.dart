@@ -6,25 +6,24 @@ part of 'specialization_response_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SpecializationData _$SpecializationDataFromJson(Map<String, dynamic> json) =>
-    SpecializationData(
-      id: (json['id'] as num?)?.toInt(),
-      name: json['name'] as String?,
-      doctors: (json['doctors'] as List<dynamic>?)
-          ?.map((e) => Doctors.fromJson(e as Map<String, dynamic>))
+SpecializationsResponseModel _$SpecializationsResponseModelFromJson(
+        Map<String, dynamic> json) =>
+    SpecializationsResponseModel(
+      specializationDataList: (json['data'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : SpecializationsData.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$SpecializationDataToJson(SpecializationData instance) =>
+Map<String, dynamic> _$SpecializationsResponseModelToJson(
+        SpecializationsResponseModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'doctors': instance.doctors,
+      'data': instance.specializationDataList,
     };
 
-SpecializationResponseModel _$SpecializationResponseModelFromJson(
-        Map<String, dynamic> json) =>
-    SpecializationResponseModel(
+SpecializationsData _$SpecializationsDataFromJson(Map<String, dynamic> json) =>
+    SpecializationsData(
       id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       doctorsList: (json['doctors'] as List<dynamic>?)
@@ -33,8 +32,8 @@ SpecializationResponseModel _$SpecializationResponseModelFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$SpecializationResponseModelToJson(
-        SpecializationResponseModel instance) =>
+Map<String, dynamic> _$SpecializationsDataToJson(
+        SpecializationsData instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

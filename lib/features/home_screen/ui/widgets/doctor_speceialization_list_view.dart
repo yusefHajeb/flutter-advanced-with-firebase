@@ -6,7 +6,7 @@ import 'doctor_speceialization_item.dart';
 
 class DoctorSpeceializationListView extends StatelessWidget {
   const DoctorSpeceializationListView({super.key, required this.data});
-  final List<SpecializationData?> data;
+  final List<SpecializationsData?> data;
   @override
   Widget build(BuildContext context) {
     return SizedBox(

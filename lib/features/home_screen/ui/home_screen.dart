@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/widgets/animated_in_effect.dart';
 import '../../../core/widgets/app_text_button.dart';
 import '../logic/home_cubit.dart';
+import 'widgets/doctor_speceialization_list_view.dart';
 
 class HomeScreen extends StatelessWidget {
   static const homeScreen = '/homeScreen';
@@ -81,52 +82,51 @@ class HomeScreen extends StatelessWidget {
                             'assets/images/doctor_home_screen.jpg'),
                       ),
                       Positioned(
-                          top: 5,
-                          left: 0,
-                          bottom: 0,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
-                            child: Column(
-                              children: [
-                                AnimateInEffect(
-                                  child: Text(
-                                    'Book and ',
-                                    style: context.theme.textTheme.headlineLarge
-                                        ?.copyWith(color: Colors.white),
-                                  ),
+                        top: 5,
+                        left: 0,
+                        bottom: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                          child: Column(
+                            children: [
+                              AnimateInEffect(
+                                child: Text(
+                                  'Book and ',
+                                  style: context.theme.textTheme.headlineLarge
+                                      ?.copyWith(color: Colors.white),
                                 ),
-                                AppSize.verticalSize(3),
-                                AnimateInEffect(
-                                  child: Text('Schedual with',
-                                      style: context
-                                          .theme.textTheme.headlineLarge
-                                          ?.copyWith(color: Colors.white)),
-                                ),
-                                AppSize.verticalSize(3),
-                                AnimateInEffect(
-                                  child: Text('nearset Doctor ',
-                                      style: context
-                                          .theme.textTheme.headlineLarge
-                                          ?.copyWith(color: Colors.white)),
-                                ),
-                                AppSize.verticalSize(10),
-                                AppTextButton(
-                                  buttonText: 'Find hestory',
-                                  onPressed: () {},
-                                  verticalPadding: 1,
-                                  horizontalPadding: 3,
-                                  backgroundColor: Colors.white,
-                                  borderRadius: 40,
-                                  buttonHeight: 50,
-                                  buttonWidth: 100,
-                                  textStyle: context.theme.textTheme.bodyMedium
-                                      ?.copyWith(
-                                          color: AppColors.darkPrimaryColor),
-                                )
-                              ],
-                            ),
-                          )),
+                              ),
+                              AppSize.verticalSize(3),
+                              AnimateInEffect(
+                                child: Text('Schedual with',
+                                    style: context.theme.textTheme.headlineSmall
+                                        ?.copyWith(color: Colors.white)),
+                              ),
+                              AppSize.verticalSize(3),
+                              AnimateInEffect(
+                                child: Text('nearset Doctor ',
+                                    style: context.theme.textTheme.headlineSmall
+                                        ?.copyWith(color: Colors.white)),
+                              ),
+                              AppSize.verticalSize(10),
+                              AppTextButton(
+                                buttonText: 'Find hestory',
+                                onPressed: () {},
+                                verticalPadding: 1,
+                                horizontalPadding: 3,
+                                backgroundColor: Colors.white,
+                                borderRadius: 40,
+                                buttonHeight: 50,
+                                buttonWidth: 100,
+                                textStyle: context.theme.textTheme.headlineSmall
+                                    ?.copyWith(
+                                        color: AppColors.darkPrimaryColor),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -163,17 +163,20 @@ class HomeScreen extends StatelessWidget {
                       );
                     }, specializationSuccess: (specializationDataModel) {
                       var specilizationData = specializationDataModel;
-                      print('specilization data ==================');
                       // print(specilizationData?.first?.doctors);
                       return Expanded(
                         child: Column(
                           children: [
-                            // DoctorSpeceializationListView(
-                            //   data: state.specializations.specializationData ??
-                            //       [],
-                            // ),
+                            DoctorSpeceializationListView(
+                                data:
+                                    specilizationData.specializationDataList ??
+                                        []),
                             DoctorsListView(
-                                doctors: specilizationData.doctorsList ?? [])
+                                doctors: specilizationData
+                                        .specializationDataList
+                                        ?.first
+                                        ?.doctorsList ??
+                                    [])
                           ],
                         ),
                       );

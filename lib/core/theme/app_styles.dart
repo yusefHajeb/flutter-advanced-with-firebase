@@ -14,9 +14,9 @@ class TextStyles {
     fontWeight: FontWeightHelper.bold,
   );
   static TextStyle bodySmall = TextStyle(
-    fontSize: 14.sp,
+    fontSize: 13.sp,
     fontFamily: "Almarai",
-    fontWeight: FontWeightHelper.semiBold,
+    fontWeight: FontWeightHelper.regular,
   );
   static TextStyle h1 = TextStyle(
     fontSize: 24.sp,
@@ -48,7 +48,7 @@ class TextStyles {
   );
 
   static TextStyle bodyMediuum = TextStyle(
-    fontSize: 16.sp,
+    fontSize: 15.sp,
     fontFamily: "Almarai",
     fontWeight: FontWeightHelper.bold,
   );

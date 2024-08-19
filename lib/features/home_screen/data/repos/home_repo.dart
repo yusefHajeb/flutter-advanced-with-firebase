@@ -8,7 +8,7 @@ class HomeRepo {
   final HomeApiService homeApiService;
 
   HomeRepo({required this.homeApiService});
-  Future<ApiResult<SpecializationResponseModel>> getHomeData() async {
+  Future<ApiResult<SpecializationsResponseModel>> getHomeData() async {
     try {
       final response = await homeApiService.getHomeData();
       return ApiResult.success(response);

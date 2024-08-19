@@ -1,35 +1,35 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
+
 part 'specialization_response_model.g.dart';
 
 @JsonSerializable()
-class SpecializationData {
-  int? id;
-  String? name;
-  @JsonKey(name: 'doctors')
-  List<Doctors>? doctors;
-  SpecializationData({this.id, this.name, this.doctors});
+class SpecializationsResponseModel {
+  @JsonKey(name: 'data')
+  List<SpecializationsData?>? specializationDataList;
 
-  factory SpecializationData.fromJsom(Map<String, dynamic> json) =>
-      _$SpecializationDataFromJson(json);
+  SpecializationsResponseModel({
+    this.specializationDataList,
+  });
 
-  static fromJson(Map<String, dynamic> e) {}
+  factory SpecializationsResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$SpecializationsResponseModelFromJson(json);
 }
 
 @JsonSerializable()
-class SpecializationResponseModel {
+class SpecializationsData {
   int? id;
   String? name;
   @JsonKey(name: 'doctors')
   List<Doctors?>? doctorsList;
 
-  SpecializationResponseModel({
+  SpecializationsData({
     this.id,
     this.name,
     this.doctorsList,
   });
 
-  factory SpecializationResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$SpecializationResponseModelFromJson(json);
+  factory SpecializationsData.fromJson(Map<String, dynamic> json) =>
+      _$SpecializationsDataFromJson(json);
 }
 
 @JsonSerializable()

@@ -8,7 +8,7 @@ import '../../data/models/specialization_response_model.dart';
 
 class DoctorSpeceializationItem extends StatelessWidget {
   const DoctorSpeceializationItem({super.key, this.item});
-  final SpecializationData? item;
+  final SpecializationsData? item;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,8 +26,8 @@ class DoctorSpeceializationItem extends StatelessWidget {
         ),
         AppSize.verticalSize(5),
         Text(
-          'YAH',
-          style: context.theme.textTheme.bodyMedium,
+          item?.name ?? "",
+          style: context.theme.textTheme.bodySmall?.copyWith(fontSize: 12),
         )
       ],
     );

@@ -18,21 +18,30 @@ class DoctorsListViewItem extends StatelessWidget {
           ClipRRect(
             clipBehavior: Clip.antiAlias,
             borderRadius: BorderRadius.circular(12),
-            child: Image.network(doctorModel?.photo ?? '', fit: BoxFit.cover),
+            child: Image.network(
+              doctorModel?.photo ?? '',
+              fit: BoxFit.cover,
+              width: 100,
+            ),
           ),
           AppSize.horizontalSize(20),
           Expanded(
-              child: Column(
-            children: [
-              Text(doctorModel?.name ?? "name",
-                  style: context.theme.textTheme.headlineMedium),
-              AppSize.verticalSize(6),
-              Text(doctorModel?.email ?? "address",
-                  style: context.theme.textTheme.headlineSmall),
-              AppSize.verticalSize(6),
-              Text(doctorModel?.name ?? "address",
-                  style: context.theme.textTheme.headlineSmall)
-            ],
+              child: Container(
+            decoration: BoxDecoration(
+                color: Color.fromARGB(255, 251, 251, 251),
+                borderRadius: BorderRadius.circular(14)),
+            child: Column(
+              children: [
+                Text(doctorModel?.name ?? "name",
+                    style: context.theme.textTheme.bodyMedium),
+                AppSize.verticalSize(6),
+                Text(doctorModel?.email ?? "address",
+                    style: context.theme.textTheme.bodySmall),
+                AppSize.verticalSize(6),
+                Text(doctorModel?.name ?? "address",
+                    style: context.theme.textTheme.bodySmall)
+              ],
+            ),
           ))
         ],
       ),
