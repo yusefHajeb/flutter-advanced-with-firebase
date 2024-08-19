@@ -21,13 +21,13 @@ class _HomeApiService implements HomeApiService {
   String? baseUrl;
 
   @override
-  Future<SpecializationResponseModel> getHomeData() async {
+  Future<SpecializationsResponseModel> getHomeData() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SpecializationResponseModel>(Options(
+        _setStreamType<SpecializationsResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -43,7 +43,7 @@ class _HomeApiService implements HomeApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = SpecializationResponseModel.fromJson(_result.data!);
+    final value = SpecializationsResponseModel.fromJson(_result.data!);
     return value;
   }
 

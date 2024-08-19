@@ -11,7 +11,7 @@ class HomeState with _$HomeState {
 //spesizialition
 
   const factory HomeState.specializationSuccess(
-      SpecializationResponseModel specializations) = SpecializationSuccess;
+      SpecializationsResponseModel specializations) = SpecializationSuccess;
   const factory HomeState.specializationError(ErrorHandler error) =
       SpecializationError;
 
