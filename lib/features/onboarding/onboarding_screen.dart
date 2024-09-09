@@ -1,13 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_with_firebase/core/helper/app_size.dart';
+import 'package:flutter_advanced_with_firebase/core/helper/constance.dart';
 import 'package:flutter_advanced_with_firebase/core/helper/extentions.dart';
 import 'package:flutter_advanced_with_firebase/core/routes/routes.dart';
 import 'package:flutter_advanced_with_firebase/core/theme/app_styles.dart';
 import 'package:flutter_advanced_with_firebase/features/onboarding/widgets/doc_image_and_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class OnboardingScreen extends StatelessWidget {
+import '../../core/helper/sheard_prefrence_healper.dart';
+
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
+
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _checkUserStatus();
+  }
+
+  Future<void> _checkUserStatus() async {
+    try {
+      final loginComplete =
+          await SharedPrefrenceHelper.isUserLoggedIn(); // استخدام await هنا
+      final isOnBoardingDone =
+          await SharedPrefrenceHelper.getData(SharedPrefKeys.onBoarding);
+      if (isOnBoardingDone && loginComplete) {
+        Navigator.pushReplacementNamed(context, Routes.homeScreen);
+      } else if (isOnBoardingDone) {
+        Navigator.pushReplacementNamed(context, Routes.loginScreen);
+      } else {}
+    } catch (e) {
+      try {
+        final isOnBoardingDone =
+            await SharedPrefrenceHelper.getData(SharedPrefKeys.onBoarding);
+        if (isOnBoardingDone) {
+          Navigator.pushReplacementNamed(context, Routes.loginScreen);
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +75,12 @@ class OnboardingScreen extends StatelessWidget {
                       ),
                       AppSize.height10,
                       TextButton(
-                        onPressed: () {
+                        onPressed: () async {
+                          await SharedPrefrenceHelper.setData(
+                              SharedPrefKeys.onBoarding, true);
+                          print('onBorading');
+                          print(await SharedPrefrenceHelper.getData(
+                              SharedPrefKeys.onBoarding));
                           context.pushReplaceNamed(Routes.loginScreen);
                         },
                         style: ButtonStyle(
