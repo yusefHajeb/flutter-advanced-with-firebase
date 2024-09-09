@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import '../helper/sheard_prefrence_healper.dart';
+
 class DioFactory {
   /// private constructor as I don't want to allow creating an instance of this class
   DioFactory._();
@@ -33,11 +35,14 @@ class DioFactory {
     );
   }
 
-  static void addDioHeader() {
+  static Future<void> addDioHeader() async {
     dio?.options.headers = {
       "Accept": "application/json",
-      "Authorization":
-          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3ZjYXJlLmludGVncmF0aW9uMjUuY29tL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNzI0MDc1NTkzLCJleHAiOjE3MjQxNjE5OTMsIm5iZiI6MTcyNDA3NTU5MywianRpIjoiU3VJdUN1ZTk3WnVXUUQycyIsInN1YiI6IjE3MTUiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.-D9Wg-eR8dMAyq8iMwqeR8U16KbLkQkLwqZU6mfketc"
+      "Authorization": "Bearer ${await SharedPrefrenceHelper.getSecureToken()}"
     };
+  }
+
+  static void setTokenToHeader(String token) {
+    dio?.options.headers["Authorization"] = "Bearer $token";
   }
 }
