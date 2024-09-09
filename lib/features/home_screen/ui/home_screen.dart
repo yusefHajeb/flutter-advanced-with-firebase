@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_with_firebase/core/helper/app_size.dart';
 import 'package:flutter_advanced_with_firebase/core/helper/extentions.dart';
+import 'package:flutter_advanced_with_firebase/core/helper/sheard_prefrence_healper.dart';
 import 'package:flutter_advanced_with_firebase/core/networking/api_error_handler.dart';
 import 'package:flutter_advanced_with_firebase/core/theme/app_colors.dart';
 import 'package:flutter_advanced_with_firebase/features/home_screen/logic/home_state.dart';
@@ -112,7 +113,9 @@ class HomeScreen extends StatelessWidget {
                               AppSize.verticalSize(10),
                               AppTextButton(
                                 buttonText: 'Find hestory',
-                                onPressed: () {},
+                                onPressed: () async {
+                                  await SharedPrefrenceHelper.clear();
+                                },
                                 verticalPadding: 1,
                                 horizontalPadding: 3,
                                 backgroundColor: Colors.white,

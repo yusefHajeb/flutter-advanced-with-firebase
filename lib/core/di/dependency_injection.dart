@@ -7,6 +7,7 @@ import 'package:flutter_advanced_with_firebase/features/login/data/repos/login_r
 import 'package:flutter_advanced_with_firebase/features/login/logic/cubit/login_cubet_cubit.dart';
 import 'package:flutter_advanced_with_firebase/features/sign_up/logic/cubit/sing_up_cubit.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/home_screen/logic/home_cubit.dart';
 import '../../features/sign_up/data/repo/sing_up_repo.dart';
@@ -15,6 +16,9 @@ final getIt = GetIt.instance;
 
 Future<void> setupGtIt() async {
   Dio dio = DioFactory.getDio();
+  final sharedPreferences = await SharedPreferences.getInstance();
+  getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+
   getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
 
   //login
