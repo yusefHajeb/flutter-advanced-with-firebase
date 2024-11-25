@@ -30,7 +30,7 @@ class _DoctorSpeceializationListViewState
         itemCount: widget.data.length,
         itemBuilder: (context, index) => GestureDetector(
           onTap: () {
-c            setState(() {
+            setState(() {
               selectedId = widget.data[index]?.id ?? 0;
             });
             context
