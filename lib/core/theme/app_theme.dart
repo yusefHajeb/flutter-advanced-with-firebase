@@ -1,3 +1,5 @@
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../helper/app_colors_extentions.dart';
@@ -45,7 +47,6 @@ class AppTheme {
         ),
         displayMedium: TextStyles.headlineMedium.copyWith(
           color: _darkAppColors.onBackground,
-          
         ),
         headlineMedium: TextStyles.headlineMedium
             .copyWith(color: _darkAppColors.onBackground),

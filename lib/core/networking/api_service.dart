@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_advanced_with_firebase/core/networking/api_constant.dart';
 import 'package:flutter_advanced_with_firebase/features/login/data/models/login_request_body.dart';
+import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 
 import '../../features/login/data/models/login_response.dart';

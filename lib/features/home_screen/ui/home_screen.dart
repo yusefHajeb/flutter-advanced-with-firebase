@@ -4,10 +4,12 @@ import 'package:flutter_advanced_with_firebase/core/helper/extentions.dart';
 import 'package:flutter_advanced_with_firebase/core/helper/sheard_prefrence_healper.dart';
 import 'package:flutter_advanced_with_firebase/core/networking/api_error_handler.dart';
 import 'package:flutter_advanced_with_firebase/core/theme/app_colors.dart';
+import 'package:flutter_advanced_with_firebase/features/home_screen/data/models/specialization_response_model.dart';
 import 'package:flutter_advanced_with_firebase/features/home_screen/logic/home_state.dart';
 import 'package:flutter_advanced_with_firebase/features/home_screen/ui/widgets/doctors_list_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../../../core/widgets/animated_in_effect.dart';
 import '../../../core/widgets/app_text_button.dart';
 import '../logic/home_cubit.dart';
@@ -153,41 +155,81 @@ class HomeScreen extends StatelessWidget {
                       current is SpecializationError ||
                       current is SpecializationSuccess,
                   builder: (context, state) {
-                    return state.maybeWhen(specializationLoading: () {
-                      return const SizedBox(
-                          height: 100,
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ));
-                    }, specializationError: (error) {
-                      return Center(
-                        child: Text(ErrorHandler.handle(error.apiErrorModel)
-                            .toString()),
-                      );
-                    }, specializationSuccess: (specializationDataModel) {
-                      var specilizationData = specializationDataModel;
-                      // print(specilizationData?.first?.doctors);
-                      return Expanded(
-                        child: Column(
-                          children: [
-                            DoctorSpeceializationListView(
-                                data:
-                                    specilizationData.specializationDataList ??
-                                        []),
-                            DoctorsListView(
-                                doctors: specilizationData
-                                        .specializationDataList
-                                        ?.first
-                                        ?.doctorsList ??
-                                    [])
-                          ],
-                        ),
-                      );
-                    }, orElse: () {
-                      return const Center(
-                        child: Text("defult"),
-                      );
-                    });
+                    return state.maybeWhen(
+                      specializationError: (error) {
+                        return Center(
+                          child: Text(
+                            ErrorHandler.handle(error.apiErrorModel).toString(),
+                            style: context.theme.textTheme.headlineSmall,
+                          ),
+                        );
+                      },
+                      specializationSuccess: (specializationDataModel, doctors,
+                          specializationData) {
+                        return Expanded(
+                          child: Column(
+                            children: [
+                              DoctorSpeceializationListView(
+                                data: specializationDataModel
+                                        .specializationDataList ??
+                                    [],
+                              ),
+                              DoctorsListView(
+                                doctors: doctors ?? [],
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      specializationLoading: () {
+                        return Expanded(
+                          child: Skeletonizer(
+                            justifyMultiLineText: false,
+                            textBoneBorderRadius:
+                                const TextBoneBorderRadius.fromHeightFactor(.5),
+                            effect: ShimmerEffect(
+                              baseColor: Colors.grey[300]!,
+                              highlightColor: Colors.grey[100]!,
+                              duration: const Duration(seconds: 1),
+                            ),
+                            enableSwitchAnimation: true,
+                            enabled: true,
+                            child: Column(
+                              children: [
+                                DoctorSpeceializationListView(
+                                  data: List.generate(
+                                    5,
+                                    (index) => SpecializationsData(
+                                      doctorsList: [
+                                        Doctors(degree: '', photo: ''),
+                                        Doctors(degree: '', photo: ''),
+                                        Doctors(degree: '', photo: ''),
+                                      ],
+                                      name: '89798787878987',
+                                    ),
+                                  ),
+                                ),
+                                DoctorsListView(
+                                  doctors: List.generate(
+                                    5,
+                                    (index) => Doctors(
+                                      name: '-----------------',
+                                      degree: '-----------------',
+                                      email: '-----------------',
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      orElse: () {
+                        return const Center(
+                          child: Text("defult"),
+                        );
+                      },
+                    );
                   },
                 ),
               ],

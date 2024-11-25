@@ -84,6 +84,9 @@ class _$SingUpStateCopyWithImpl<T, $Res, $Val extends SingUpState<T>>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SingUpState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -100,6 +103,9 @@ class __$$InitialImplCopyWithImpl<T, $Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl<T> _value, $Res Function(_$InitialImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of SingUpState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -214,6 +220,9 @@ class __$$SingUpLoadingImplCopyWithImpl<T, $Res>
   __$$SingUpLoadingImplCopyWithImpl(_$SingUpLoadingImpl<T> _value,
       $Res Function(_$SingUpLoadingImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of SingUpState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -331,6 +340,8 @@ class __$$SingUpSuccessImplCopyWithImpl<T, $Res>
       $Res Function(_$SingUpSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of SingUpState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -370,7 +381,9 @@ class _$SingUpSuccessImpl<T> implements SingUpSuccess<T> {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SingUpState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SingUpSuccessImplCopyWith<T, _$SingUpSuccessImpl<T>> get copyWith =>
@@ -456,7 +469,10 @@ abstract class SingUpSuccess<T> implements SingUpState<T> {
   const factory SingUpSuccess(final T data) = _$SingUpSuccessImpl<T>;
 
   T get data;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SingUpState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SingUpSuccessImplCopyWith<T, _$SingUpSuccessImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -478,6 +494,8 @@ class __$$SingUpErrorImplCopyWithImpl<T, $Res>
       _$SingUpErrorImpl<T> _value, $Res Function(_$SingUpErrorImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of SingUpState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -516,7 +534,9 @@ class _$SingUpErrorImpl<T> implements SingUpError<T> {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SingUpState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SingUpErrorImplCopyWith<T, _$SingUpErrorImpl<T>> get copyWith =>
@@ -603,7 +623,10 @@ abstract class SingUpError<T> implements SingUpState<T> {
       _$SingUpErrorImpl<T>;
 
   String get error;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SingUpState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SingUpErrorImplCopyWith<T, _$SingUpErrorImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
