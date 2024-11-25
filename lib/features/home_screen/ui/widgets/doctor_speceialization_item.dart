@@ -35,7 +35,7 @@ class DoctorSpeceializationItem extends StatelessWidget {
                     child: SvgPicture.asset(
                       height: 40.h,
                       width: 47.w,
-                      'assets/svgs/notifications.svg',
+                      'assets/svgs/doctor.svg',
                     ),
                   ),
                 ),
@@ -48,7 +48,7 @@ class DoctorSpeceializationItem extends StatelessWidget {
                     child: SvgPicture.asset(
                       height: 40.h,
                       width: 47.w,
-                      'assets/svgs/notifications.svg',
+                      'assets/svgs/doctor.svg',
                     ),
                   ),
                 ),
